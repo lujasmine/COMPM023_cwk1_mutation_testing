@@ -132,12 +132,12 @@ public class SetUtilsTest {
         set.add(a);
         set.add(new String("b"));
         set.add(a);
-        
+
         assertEquals(2, set.size());
-        
+
         set.add(new String("a"));
         assertEquals(3, set.size());
-        
+
         set.remove(a);
         assertEquals(2, set.size());
     }
@@ -148,9 +148,14 @@ public class SetUtilsTest {
         assertEquals(7, set.size());
         assertTrue(set.containsAll(setA));
         assertTrue(set.containsAll(setB));
+        assertFalse(set.isEmpty());
 
         final Set<Integer> set2 = SetUtils.union(setA, SetUtils.<Integer>emptySet());
         assertEquals(setA, set2);
+
+        final Set<Integer> empty = SetUtils.union(SetUtils.<Integer>emptySet(),
+            SetUtils.<Integer>emptySet());
+        assertTrue(empty.isEmpty());
 
         try {
             SetUtils.union(setA, null);
